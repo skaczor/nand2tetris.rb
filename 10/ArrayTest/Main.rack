@@ -1,3 +1,4 @@
+# -*-Ruby-*-
 # Computes the average of a sequence of integers.
 class Main
   def self.main

@@ -1,3 +1,4 @@
+# -*-Ruby-*-
 ##
 # Handles writing characters to the screen.
 # The text screen (256 columns and 512 roes) is divided into 23 text rows (0..22),

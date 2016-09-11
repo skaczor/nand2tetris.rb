@@ -1,3 +1,4 @@
+# -*-Ruby-*-
 # Test program for the OS Memory class.
 class Main
   # Performs several memory manipulations.

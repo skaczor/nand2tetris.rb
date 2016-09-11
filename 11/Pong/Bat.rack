@@ -1,3 +1,4 @@
+# -*-Ruby-*-
 #
 # A graphic Pong bat. Has a screen location, width and height.
 # Has methods for drawing, erasing, moving left and right on

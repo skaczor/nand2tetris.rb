@@ -1,3 +1,4 @@
+# -*-Ruby-*-
 ##
 # A graphic ball. Has a screen location and distance of last destination.
 # Has methods for drawing, erasing and moving on the screen.
