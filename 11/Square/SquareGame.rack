@@ -1,0 +1,99 @@
+##
+# Implements the Square Dance game.
+# In this game you can move a black square around the screen and
+# change its size during the movement.
+# In the beginning, the square is located at the top-left corner
+# of the screen. The arrow keys are used to move the square.
+# The 'z' & 'x' keys are used to decrement and increment the size.
+# The 'q' key is used to quit the game.
+##
+class SquareGame
+
+  # The square
+  # @square
+
+  # The square's movement direction
+  # @direction # 0=none,1=up,2=down,3=left,4=right
+
+  # Constructs a new Square Game.
+  def initialize
+    let @square = Square.new(0, 0, 30)
+    let @direction = 0
+  end
+
+  # Deallocates the object's memory.
+  def dispose
+    call @square.dispose
+    call Memory.deAlloc(self)
+  end
+
+  # Starts the game. Handles inputs from the user that control
+  # the square's movement, direction and size.
+  def run
+    let do_exit = false
+    let key = 0
+
+    while (!do_exit)
+      # waits for a key to be pressed.
+      while key = 0
+        let key = Keyboard.keyPressed
+        call moveSquare
+      end
+
+      if key = 81
+        let do_exit = true
+      end
+
+      if key = 90
+        call @square.decSize
+      end
+
+      if key = 88
+        call @square.incSize
+      end
+
+      if key = 131
+        let @direction = 1
+      end
+
+      if key = 133
+        let @direction = 2
+      end
+
+      if key = 130
+        let @direction = 3
+      end
+
+      if key = 132
+        let @direction = 4
+      end
+
+      # waits for the key to be released.
+      while !(key = 0)
+        let key = Keyboard.keyPressed
+        call moveSquare
+      end
+    end
+  end
+
+  # Moves the square by 2 pixels in the current direction.
+  def moveSquare
+    if @direction = 1
+      call @square.moveUp
+    end
+
+    if @direction = 2
+      call @square.moveDown
+    end
+
+    if @direction = 3
+      call @square.moveLeft
+    end
+
+    if @direction = 4
+      call @square.moveRight
+    end
+
+    call Sys.wait(5) # Delays the next movement.
+  end
+end

@@ -1,0 +1,56 @@
+;; Emacs users: print with (prefix)ebnf-print-buffer
+
+RackFile = Class.
+
+Class = "class" ClassName EOL {SubroutineDec}* "end".
+
+SubroutineDec = "def" SubroutineName ["(" ParameterList ")"] EOL SubroutineBody "end".
+
+ParameterList = {VarName || ","}*.
+;>
+SubroutineBody = {Statement}*.
+
+Statement = LetStatement | IfStatement | WhileStatement | CallStatement | ReturnStatement.
+
+LetStatement = "let" Variable ["[" Expression "]"] "=" Expression EOL.
+
+IfStatement = "if" Expression EOL {Statement}* ["else" EOL {Statement}*] end EOL.
+
+WhileStatement = "while" Expression EOL {Statement}* end EOL.
+
+CallStatement = "call" SubroutineCall EOL.
+
+ReturnStatement = "return" [Expression] EOL.
+
+Expression = {Term || Operator}+.
+
+Term = IntegerConstant | StringConstant | KeywordConstant | Variable
+     | Variable "[" Expression "]" | SubroutineCall | "(" Expression ")" | UnaryOperator Term.
+;>
+Operator = "+" | "-" | "*" | "/" | "&" | "|" | "<" | ">" | "=".
+;>
+UnaryOperator = "-" | "!".
+
+IntegerConstant = "[0-9]+".
+;>
+StringConstant = "\"" "[^\"\\n]*" "\"".
+;>
+KeywordConstant = "true" | "false" | "nil" | "self".
+
+SubroutineCall = [(ClassName | Variable) "."] SubroutineName ["(" ExpressionList ")"].
+
+ExpressionList = {Expression || ,}*.
+
+Variable = ["@"] ["@"] VarName.
+
+ClassName = Identifier.
+;>
+SubroutineName = ["self" "."] Identifier.
+;>
+VarName = Identifier.
+;>
+Identifier = "[a-zA-Z_][0-9a-zA-Z_]*".
+
+Comment = "#" "[^\\n]*" "\\n".
+
+EOL = "\\r?\\n".

@@ -1,0 +1,96 @@
+#
+# A graphic Pong bat. Has a screen location, width and height.
+# Has methods for drawing, erasing, moving left and right on
+# the screen and changing the width.
+#
+class Bat
+
+  # The screen location
+  # @x
+  # @y
+
+  # The width and height
+  # @width
+  # @height
+
+  # The direction of the bat's movement
+  # @direction # 1 = left, 2 = right
+
+  # Constructs a new bat with the given location and width.
+  def initialize(Ax, Ay, Awidth, Aheight)
+    let @x = Ax
+    let @y = Ay
+    let @width = Awidth
+    let @height = Aheight
+    let @direction = 2
+
+    call show
+  end
+
+  # Deallocates the object's memory.
+  def dispose
+    call Memory.deAlloc(self)
+  end
+
+  # Draws the bat on the screen.
+  def show
+    call Screen.setColor(true)
+    call draw
+  end
+
+  # Erases the bat from the screen.
+  def hide
+    call Screen.setColor(false)
+    call draw
+  end
+
+  # Draws the bat.
+  def draw
+    call Screen.drawRectangle(@x, @y, @x + @width, @y + @height)
+  end
+
+  # Sets the direction of the bat (0=stop, 1=left, 2=right).
+  def setDirection(Adirection)
+    let @direction = Adirection
+  end
+
+  # Returns the left edge of the bat.
+  def getLeft
+    return @x
+  end
+
+  # Returns the right edge of the bat.
+  def getRight
+    return @x + @width
+  end
+
+  # Sets the width.
+  def setWidth(Awidth)
+    call hide
+    let @width = Awidth
+    call show
+  end
+
+  # Moves the bat one step in its direction.
+  def move
+    if @direction = 1
+      let @x = @x - 4
+      if @x < 0
+        let @x = 0
+      end
+      call Screen.setColor(false)
+      call Screen.drawRectangle((@x + @width) + 1, @y, (@x + @width) + 4, @y + @height)
+      call Screen.setColor(true)
+      call Screen.drawRectangle(@x, @y, @x + 3, @y + @height)
+    else
+      let @x = @x + 4
+      if (@x + @width) > 511
+        let @x = 511 - @width
+      end
+      call Screen.setColor(false)
+      call Screen.drawRectangle(@x - 4, @y, @x - 1, @y + @height)
+      call Screen.setColor(true)
+      call Screen.drawRectangle((@x + @width) - 3, @y, @x + @width, @y + @height)
+    end
+  end
+end

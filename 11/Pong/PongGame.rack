@@ -1,0 +1,149 @@
+##
+# The Pong game.
+##
+class PongGame
+
+  # The singlton
+  # @@instance
+
+  # The bat
+  # @bat
+
+  # The ball
+  # @ball
+
+  # The current wall that the ball is bouncing from.
+  # @wall
+
+  # True when the game is over
+  # @exit
+
+  # The current score.
+  # @score
+
+  # The last wall that the ball bounced from.
+  # @lastWall
+
+  # The current width of the bat
+  # @batWidth
+
+  # Constructs a new Pong Game.
+  def initialize
+    call Screen.clearScreen
+
+    let @batWidth = 50
+    let @bat = Bat.new(230, 229, @batWidth, 7)
+
+    let @ball = Ball.new(253, 222, 0, 511, 0, 229)
+    call @ball.setDestination(400,0)
+
+    call Screen.drawRectangle(0, 238, 511, 240)
+    call Output.moveCursor(22,0)
+    call Output.printString("Score: 0")
+
+    let @exit = false
+    let @score = 0
+    let @wall = 0
+    let @lastWall = 0
+  end
+
+  # Deallocates the object's memory.
+  def dispose
+    call @bat.dispose
+    call @ball.dispose
+    call Memory.deAlloc(self)
+  end
+
+  # Creates an instance of PongGame and stores it.
+  def self.newInstance
+    let @@instance = PongGame.new
+  end
+
+  # Returns the single instance of PongGame.
+  def self.getInstance
+    return @@instance
+  end
+
+  # Starts the game. Handles inputs from the user that control
+  # the bat's movement direction.
+  def run
+    let key = 0
+    while !@exit
+      # waits for a key to be pressed.
+      while (key = 0) & (!@exit)
+        let key = Keyboard.keyPressed
+        call @bat.move
+        call moveBall
+        call Sys.wait(50)
+      end
+
+      if key = 130
+        call @bat.setDirection(1)
+      else
+        if key = 132
+          call @bat.setDirection(2)
+        else
+          if key = 140
+            let @exit = true
+          end
+        end
+      end
+
+      # Waits for the key to be released.
+      while (!(key = 0)) & (!@exit)
+        let key = Keyboard.keyPressed
+        call @bat.move
+        call moveBall
+        call Sys.wait(50)
+      end
+    end
+
+    if @exit
+      call Output.moveCursor(10,27)
+      call Output.printString("Game Over")
+    end
+  end
+
+  # Handles ball movement, including bouncing.
+  # If the ball bounces from the wall, finds its new direction.
+  # If the ball bounces from the bat, shrinks the bat's size and
+  # increases the score by one.
+  def moveBall
+    let bouncingDirection = 0
+    let batLeft = 0
+    let batRight = 0
+    let ballLeft = 0
+    let ballRight = 0
+    let @wall = @ball.move
+
+    if (@wall > 0) & (!(@wall = @lastWall))
+      let @lastWall = @wall
+      let bouncingDirection = 0
+      let batLeft = @bat.getLeft
+      let batRight = @bat.getRight
+      let ballLeft = @ball.getLeft
+      let ballRight = @ball.getRight
+
+      if @wall = 4
+        let @exit = (batLeft > ballRight) | (batRight < ballLeft)
+        if !@exit
+          if ballRight < (batLeft + 10)
+            let bouncingDirection = -1
+          else
+            if ballLeft > (batRight - 10)
+              let bouncingDirection = 1
+            end
+          end
+
+          let @batWidth = @batWidth - 2
+          call @bat.setWidth(@batWidth)
+          let @score = @score + 1
+          call Output.moveCursor(22,7)
+          call Output.printInt(@score)
+        end
+      end
+
+      call @ball.bounce(bouncingDirection)
+    end
+  end
+end

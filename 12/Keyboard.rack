@@ -1,0 +1,46 @@
+##
+# A library for handling user input from the keyboard.
+##
+class Keyboard
+  # Initializes the keyboard.
+  def self.init
+  end
+
+  # Returns the ASCII code (as char) of the currently pressed key,
+  # or 0 if no key is currently pressed.
+  # Recognizes all ASCII characters, as well as the following extension
+  # of action keys:
+  # New line = 128 = String.newline
+  # Backspace = 129 = String.backspace
+  # Left Arrow = 130
+  # Up Arrow = 131
+  # Right Arrow = 132
+  # Down Arrow = 133
+  # Home = 134
+  # End = 135
+  # Page Up = 136
+  # Page Down = 137
+  # Insert = 138
+  # Delete = 139
+  # ESC = 140
+  # F1 - F12 = 141 - 152
+  def self.keyPressed
+  end
+
+  # Reads the next character from the keyboard.
+  # waits until a key is pressed and then released, then echoes
+  # the key to the screen, and returns the value of the pressed key.
+  def self.readChar
+  end
+
+  # Prints the message on the screen, reads the next line
+  # (until a newline character) from the keyboard, and returns its value.
+  def self.readLine(message)
+  end
+
+  # Prints the message on the screen, reads the next line
+  # (until a newline character) from the keyboard, and returns its
+  # integer value (until the first non numeric character).
+  def self.readInt(message)
+  end
+end

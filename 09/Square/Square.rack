@@ -1,0 +1,102 @@
+##
+# Implements a graphic square. A graphic square has a screen location
+# and a size. It also has methods for drawing, erasing, moving on the
+# screen, and changing its size.
+##
+class Square
+
+  # Location on the screen
+  # @x
+  # @y
+
+  # The size of the square
+  # @size
+
+  # Constructs a new square with a given location and size.
+  def initialize(Ax, Ay, Asize)
+    let @x = Ax
+    let @y = Ay
+    let @size = Asize
+
+    call draw
+  end
+
+  # Deallocates the object's memory.
+  def dispose
+    call Memory.deAlloc(self)
+  end
+
+  # Draws the square on the screen.
+  def draw
+    call Screen.setColor(true)
+    call Screen.drawRectangle(@x, @y, @x + @size, @y + @size)
+  end
+
+  # Erases the square from the screen.
+  def erase
+    call Screen.setColor(false)
+    call Screen.drawRectangle(@x, @y, @x + @size, @y + @size)
+  end
+
+  # Increments the size by 2 pixels.
+  def incSize
+    if ((@y + @size) < 254) & ((@x + @size) < 510)
+      call erase
+      let @size = @size + 2
+      call draw
+    end
+  end
+
+  # Decrements the size by 2 pixels.
+  def decSize
+    if @size > 2
+      call erase
+      let @size = @size - 2
+      call draw
+    end
+  end
+
+  # Moves up by 2 pixels.
+  def moveUp
+    if @y > 1
+      call Screen.setColor(false)
+      call Screen.drawRectangle(@x, (@y + @size) - 1, @x + @size, @y + @size)
+      let @y = @y - 2
+      call Screen.setColor(true)
+      call Screen.drawRectangle(@x, @y, @x + @size, @y + 1)
+    end
+  end
+
+  # Moves down by 2 pixels.
+  def moveDown
+    if (@y + @size) < 254
+      call Screen.setColor(false)
+      call Screen.drawRectangle(@x, @y, @x + @size, @y + 1)
+      let @y = @y + 2
+      call Screen.setColor(true)
+      call Screen.drawRectangle(@x, (@y + @size) - 1, @x + @size, @y + @size)
+    end
+  end
+
+  # Moves left by 2 pixels.
+  def moveLeft
+    if @x > 1
+      call Screen.setColor(false)
+      call Screen.drawRectangle((@x + @size) - 1, @y, @x + @size, @y + @size)
+      let @x = @x - 2
+      call Screen.setColor(true)
+      call Screen.drawRectangle(@x, @y, @x + 1, @y + @size)
+    end
+  end
+
+  # Moves right by 2 pixels.
+  def moveRight
+    if (@x + @size) < 510
+      call Screen.setColor(false)
+      call Screen.drawRectangle(@x, @y, @x + 1, @y + @size)
+      let @x = @x + 2
+      call Screen.setColor(true)
+      call Screen.drawRectangle((@x + @size) - 1, @y, @x + @size, @y + @size)
+    end
+  end
+end

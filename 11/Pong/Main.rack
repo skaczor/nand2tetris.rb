@@ -1,0 +1,13 @@
+##
+# The main class of the Pong game.
+##
+class Main
+
+  # Initializes the Pong game and starts it.
+  def self.main
+    call PongGame.newInstance
+    let game = PongGame.getInstance
+    call game.run
+    call game.dispose
+  end
+end

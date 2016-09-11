@@ -1,0 +1,32 @@
+##
+# A basic math library.
+##
+class Math
+    # Initializes the library.
+    def self.init
+    end
+
+    # Returns the absolute value of x.
+    def self.abs(x)
+    end
+
+    # Returns the product of x and y.
+    def self.multiply(x, y)
+    end
+
+    # Returns the integer part of x/y.
+    def self.divide(x, y)
+    end
+
+    # Returns the integer part of the square root of x.
+    def self.sqrt(x)
+    end
+
+    # Returns the greater number.
+    def self.max(a, b)
+    end
+
+    # Returns the smaller number.
+    def self.min(a, b)
+    end
+end

@@ -1,0 +1,87 @@
+# Test program for the OS Keyboard class.
+class Main
+
+  # Gets input from the user and verifies its contents.
+  def self.main
+    let c = 0
+    let key = 0
+    let s = nil
+    let i = 0
+    let ok = false
+
+    call Output.printString("keyPressed test:")
+    call Output.println
+    while !ok
+      call Output.printString("Please press the 'Page Down' key")
+      while key = 0
+        let key = Keyboard.keyPressed
+      end
+      let c = key
+      while !(key = 0)
+        let key = Keyboard.keyPressed
+      end
+
+      call Output.println
+
+      if c = 137
+        call Output.printString("ok")
+        call Output.println
+        let ok = true
+      end
+    end
+
+    let ok = false
+    call Output.printString("readChar test:")
+    call Output.println
+    call Output.printString("(Verify that the pressed character is echoed to the screen)")
+    call Output.println
+    while !ok
+      call Output.printString("Please press the number '3': ")
+      let c = Keyboard.readChar
+
+      call Output.println
+
+      if c = 51
+        call Output.printString("ok")
+        call Output.println
+        let ok = true
+      end
+    end
+
+    let ok = false
+    call Output.printString("readLine test:")
+    call Output.println
+    call Output.printString("(Verify echo and usage of 'backspace')")
+    call Output.println
+    while !ok
+      let s = Keyboard.readLine("Please type 'JACK' and press enter: ")
+
+      if s.length = 4
+        if (s.charAt(0) = 74) & (s.charAt(1) = 65) & (s.charAt(2) = 67) & (s.charAt(3) = 75)
+          call Output.printString("ok")
+          call Output.println
+          let ok = true
+        end
+      end
+    end
+
+    let ok = false
+    call Output.printString("readInt test:")
+    call Output.println
+    call Output.printString("(Verify echo and usage of 'backspace')")
+    call Output.println
+    while !ok
+      let i = Keyboard.readInt("Please type '-32123' and press enter: ")
+
+      if i = (-32123)
+        call Output.printString("ok")
+        call Output.println
+        let ok = true
+      end
+    end
+
+    call Output.println
+    call Output.printString("Test completed successfully")
+  end
+
+end

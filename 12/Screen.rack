@@ -1,0 +1,37 @@
+#
+# Graphic screen library.
+#
+class Screen
+  # Initializes the Screen.
+  def self.init
+  end
+
+  # Erases the whole screen.
+  def self.clearScreen
+  end
+
+  # Sets the color to be used in further draw commands
+  # where white = false, black = true.
+  def self.setColor(b)
+  end
+
+  # Draws the (x, y) pixel.
+  def self.drawPixel(x, y)
+  end
+
+  # Draws a line from (x1, y1) to (x2, y2).
+  def self.drawLine(x1, y1, x2, y2)
+  end
+
+  # Draws a filled rectangle where the top left corner
+  # is (x1, y1) and the bottom right corner is (x2, y2).
+  def self.drawRectangle(x1, y1, x2, y2)
+  end
+
+  # Draws a filled circle of radius r around (cx, cy).
+  def self.drawCircle(cx, cy, r)
+  end
+
+  def self.mask(bit)
+  end
+end

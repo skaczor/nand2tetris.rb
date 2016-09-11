@@ -1,0 +1,60 @@
+##
+# Handles writing characters to the screen.
+# The text screen (256 columns and 512 roes) is divided into 23 text rows (0..22),
+# each containing 64 text columns (0..63).
+# Each row is 11 pixels high (including 1 space pixel), and 8 pixels wide
+# (including 2 space pixels).
+##
+class Output
+
+  # Character map for printing on the left of a screen word
+  #@@charMaps
+
+  # Current cursor position
+  #@@column
+  #@@row
+
+  def self.init
+  end
+
+  def self.initMap
+  end
+
+  # Creates a character map array of the given char index with the given values.
+  def self.create(index, a, b, c, d, e, f, g, h, i, j, k)
+  end
+
+  # Returns the character map (array of size 11) for the given character
+  # If an invalid character is given, returns the character map of a black square.
+  def self.getMap(c)
+  end
+
+  # Moves the cursor to the jth column of the ith row,
+  # and erases the character that was there.
+  def self.moveCursor(i, j)
+  end
+
+
+  # Prints c at the cursor location and advances the cursor one
+  # column forward.
+  def self.printChar(c)
+  end
+
+  # Prints s starting at the cursor location, and advances the
+  # cursor appropriately.
+  def self.printString(s)
+  end
+
+  # Prints i starting at the cursor location, and advances the
+  # cursor appropriately.
+  def self.printInt(i)
+  end
+
+  # Advances the cursor to the beginning of the next line.
+  def self.println
+  end
+
+  # Moves the cursor one column back.
+  def self.backSpace
+  end
+end

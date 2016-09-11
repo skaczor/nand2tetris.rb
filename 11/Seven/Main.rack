@@ -1,0 +1,9 @@
+##
+# Computes the value of 1 + (2 * 3) and prints the result
+#  at the top-left of the screen.  
+##
+class Main
+  def self.main
+    call Output.printInt(1 + (2 * 3))
+  end
+end

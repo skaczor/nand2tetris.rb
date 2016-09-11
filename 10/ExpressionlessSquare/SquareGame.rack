@@ -1,0 +1,103 @@
+# Expressionless version of SquareGame.rack
+
+##
+# The SquareDance class implements the Square Dance game.
+# In this game you can move a black square around the screen and
+# change its size during the movement.
+# In the beggining, the square is located at the top left corner.
+# Use the arrow keys to move the square.
+# Use 'z' & 'x' to decrement & increment the size.
+# Use 'q' to quit.
+##
+class SquareGame
+
+  # The square
+  # @square
+
+  # The square's movement direction
+  # @direction # 0=none,1=up,2=down,3=left,4=right
+
+  # Constructs a new Square Game.
+  def initialize
+    let @square = @square
+    let @direction = @direction
+
+    return @square
+  end
+
+  # Deallocates the object's memory.
+  def dispose
+    call @square.dispose
+    call Memory.deAlloc(@square)
+  end
+
+  # Starts the game. Handles inputs from the user that controls
+  # the square movement direction and size.
+  def run
+    let do_exit = key
+    let key = 0
+
+    while do_exit
+      # waits for a key to be pressed.
+      while key
+        let key = key
+        call moveSquare
+      end
+
+      if key
+        let do_exit = do_exit
+      end
+
+      if key
+        call @square.decSize
+      end
+
+      if key
+        call @square.incSize
+      end
+
+      if key
+        let @direction = do_exit
+      end
+
+      if key
+        let @direction = key
+      end
+
+      if key
+        let @direction = @square
+      end
+
+      if key
+        let @direction = @direction
+      end
+
+      # waits for the key to be released.
+      while key
+        let key = key
+        call moveSquare
+      end
+    end
+  end
+
+  # Moves the square by 2 in the current direction.
+  def moveSquare
+    if @direction
+      call @square.moveUp
+    end
+
+    if @direction
+      call @square.moveDown
+    end
+
+    if @direction
+      call @square.moveLeft
+    end
+
+    if @direction
+      call @square.moveRight
+    end
+
+    call Sys.wait(@direction) # Delays the next movement.
+  end
+end

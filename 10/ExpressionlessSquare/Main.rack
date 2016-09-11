@@ -1,0 +1,14 @@
+# Expressionless version of Main.rack
+
+##
+# The Main class initializes a new Square Dance game and starts it.
+##
+class Main
+
+  # Initializes the square game and starts it.
+  def self.main
+    let game = game
+    call game.run
+    call game.dispose
+  end
+end

@@ -1,0 +1,30 @@
+<tokens>
+<keyword> class </keyword>
+<identifier> Main </identifier>
+<symbol> &#10; </symbol>
+<keyword> def </keyword>
+<keyword> self </keyword>
+<symbol> . </symbol>
+<identifier> main </identifier>
+<symbol> &#10; </symbol>
+<keyword> let </keyword>
+<identifier> game </identifier>
+<symbol> = </symbol>
+<identifier> SquareGame </identifier>
+<symbol> . </symbol>
+<identifier> new </identifier>
+<symbol> &#10; </symbol>
+<keyword> call </keyword>
+<identifier> game </identifier>
+<symbol> . </symbol>
+<identifier> run </identifier>
+<symbol> &#10; </symbol>
+<keyword> call </keyword>
+<identifier> game </identifier>
+<symbol> . </symbol>
+<identifier> dispose </identifier>
+<symbol> &#10; </symbol>
+<keyword> end </keyword>
+<symbol> &#10; </symbol>
+<keyword> end </keyword>
+</tokens>

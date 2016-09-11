@@ -1,0 +1,25 @@
+# Computes the average of a sequence of integers.
+class Main
+  def self.main
+    let length = Keyboard.readInt("HOW MANY NUMBERS? ")
+    let a = Array.new(length)
+    let i = 0
+
+    while i < length
+      let a[i] = Keyboard.readInt("ENTER THE NEXT NUMBER: ")
+      let i = i + 1
+    end
+
+    let i = 0
+    let sum = 0
+
+    while i < length
+      let sum = sum + a[i]
+      let i = i + 1
+    end
+
+    call Output.printString("THE AVERAGE IS: ")
+    call Output.printInt(sum / length)
+    call Output.println
+  end
+end

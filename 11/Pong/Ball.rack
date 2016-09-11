@@ -1,0 +1,220 @@
+##
+# A graphic ball. Has a screen location and distance of last destination.
+# Has methods for drawing, erasing and moving on the screen.
+# The ball's dimensions are 6X6 pixels.
+##
+class Ball
+  # The ball's screen location (in pixels)
+  # @x
+  # @y
+
+  # Distance of last destination
+  # @lengthx
+  # @lengthy
+
+  # Used for straight line movement computation
+  # @d
+  # @straightD
+  # @diagonalD
+  # @invert
+  # @positivex
+  # @positivey
+
+  # wall locations
+  # @leftWall
+  # @rightWall
+  # @topWall
+  # @bottomWall
+
+  # last wall that the ball was bounced from
+  # @wall
+
+  # Constructs a new Ball with a given initial location
+  # and the locations of the walls.
+  def initialize(Ax, Ay, AleftWall, ArightWall, AtopWall, AbottomWall)
+    let @x = Ax
+    let @y = Ay
+    let @leftWall = AleftWall
+    let @rightWall = ArightWall - 6 # -6 for ball size
+    let @topWall = AtopWall
+    let @bottomWall = AbottomWall - 6 # -6 for ball size
+    let @wall = 0
+
+    call show
+  end
+
+  # Deallocates the object's memory.
+  def dispose
+    call Memory.deAlloc(self)
+  end
+
+  # Draws the ball on the screen.
+  def show
+    call Screen.setColor(true)
+    call draw
+  end
+
+  # Erases the ball from the screen.
+  def hide
+    call Screen.setColor(false)
+    call draw
+  end
+
+  # Draws the ball.
+  def draw
+    call Screen.drawRectangle(@x, @y, @x + 5, @y + 5)
+  end
+
+  # Returns the left edge of the ball.
+  def getLeft
+    return @x
+  end
+
+  # Returns the right edge of the ball.
+  def getRight
+    return @x + 5
+  end
+
+    # Sets the destination of the ball.
+  def setDestination(destx, desty)
+    let @lengthx = destx - @x
+    let @lengthy = desty - @y
+    let dx = Math.abs(@lengthx)
+    let dy = Math.abs(@lengthy)
+    let @invert = (dx < dy)
+    let temp = 0
+    let @positivex = 0
+    let @positivey = 0
+
+    # scan should be on Y-axis
+    if (@invert)
+      let temp = dx # swap dx, dy
+      let dx = dy
+      let dy = temp
+
+      let @positivex = (@y < desty)
+      let @positivey = (@x < destx)
+    else
+      let @positivex = (@x < destx)
+      let @positivey = (@y < desty)
+    end
+
+    let @d = (2 * dy) - dx
+    let @straightD = 2 * dy
+    let @diagonalD = 2 * (dy - dx)
+  end
+
+  #
+  # Moves the ball one unit towards its destination.
+  # Returns 0 if the ball has not reached a wall.
+  # If it did, returns a value according to the wall:
+  # 1-left wall, 2-right wall, 3-top wall, 4-bottom wall.
+  #
+  def move
+
+    call hide
+
+    if (@d < 0)
+      let @d = @d + @straightD
+    else
+      let @d = @d + @diagonalD
+
+      if @positivey
+        if @invert
+          let @x = @x + 4
+        else
+          let @y = @y + 4
+        end
+      else
+        if @invert
+          let @x = @x - 4
+        else
+          let @y = @y - 4
+        end
+      end
+    end
+
+    if @positivex
+      if @invert
+        let @y = @y + 4
+      else
+        let @x = @x + 4
+      end
+    else
+      if @invert
+        let @y = @y - 4
+      else
+        let @x = @x - 4
+      end
+    end
+
+    if !(@x > @leftWall)
+      let @wall = 1
+      let @x = @leftWall
+    end
+    if !(@x < @rightWall)
+      let @wall = 2
+      let @x = @rightWall
+    end
+    if !(@y > @topWall)
+      let @wall = 3
+      let @y = @topWall
+    end
+    if !(@y < @bottomWall)
+      let @wall = 4
+      let @y = @bottomWall
+    end
+
+    call show
+
+    return @wall
+  end
+
+  #
+  # Bounces from the current wall: sets the new destination
+  # of the ball according to the ball's angle and the given
+  # bouncing direction (-1/0/1=left/center/right or up/center/down).
+  #
+  def bounce(bouncingDirection)
+    # dividing by 10 first since results are too big
+    let divLengthx = @lengthx / 10
+    let divLengthy = @lengthy / 10
+    let factor = 0
+    let newx = 0
+    let newy = 0
+
+    if bouncingDirection = 0
+      let factor = 10
+    else
+      if ((!(@lengthx < 0)) & (bouncingDirection = 1)) | ((@lengthx < 0) & (bouncingDirection = (-1)))
+        let factor = 20 # bounce direction is in ball direction
+      else
+        let factor = 5 # bounce direction is against ball direction
+      end
+    end
+
+    if @wall = 1
+      let newx = 506
+      let newy = (divLengthy * (-50)) / divLengthx
+      let newy = @y + (newy * factor)
+    else
+      if @wall = 2
+        let newx = 0
+        let newy = (divLengthy * 50) / divLengthx
+        let newy = @y + (newy * factor)
+      else
+        if @wall = 3
+          let newy = 250
+          let newx = (divLengthx * (-25)) / divLengthy
+          let newx = @x + (newx * factor)
+        else  # assumes @wall = 4
+          let newy = 0
+          let newx = (divLengthx * 25) / divLengthy
+          let newx = @x + (newx * factor)
+        end
+      end
+    end
+
+    call setDestination(newx, newy)
+  end
+end

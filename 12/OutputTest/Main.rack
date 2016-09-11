@@ -1,0 +1,34 @@
+# Test program for the OS Output class.
+class Main
+
+  # Outputs the entire character set to the screen using all the
+  # methods of the Output class.
+  def self.main
+    let s = String.new(1)
+    call s.appendChar(String.doubleQuote)
+
+    call Output.moveCursor(0, 63)
+    call Output.printChar(66)
+    call Output.moveCursor(22, 0)
+    call Output.printChar(67)
+    call Output.moveCursor(22, 63)
+    call Output.printChar(68)
+    call Output.printChar(65)
+
+    call Output.moveCursor(2, 0)
+    call Output.printString("0123456789")
+    call Output.println
+
+    call Output.printString("ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz")
+    call Output.println
+
+    call Output.printString("!#$%&'()*+,-./:<=>?@[\]^_`{|}~")
+    call Output.printString(s)
+    call Output.println
+
+    call Output.printInt(-12345)
+    call Output.backSpace
+    call Output.printInt(6789)
+  end
+
+end

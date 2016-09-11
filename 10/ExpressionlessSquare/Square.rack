@@ -1,0 +1,106 @@
+# Expressionless version of Square.rack
+
+##
+# The Square class implements a graphic square. A graphic square
+# has a location on the screen and a size. It also has methods
+# for drawing, erasing, moving on the screen, and changing its size.
+##
+class Square
+
+  # Location on the screen
+  # @x
+  # @y
+
+  # The size of the square
+  # @size
+
+  # Constructs a new square with a given location and size.
+  def initialize(Ax, Ay, Asize)
+    let @x = Ax
+    let @y = Ay
+    let @size = Asize
+
+    call draw
+
+    return @x
+  end
+
+  # Deallocates the object's memory.
+  def dispose
+    call Memory.deAlloc(@x)
+  end
+
+  # Draws the square on the screen.
+  def draw
+    call Screen.setColor(@x)
+    call Screen.drawRectangle(@x, @y, @x, @y)
+  end
+
+  # Erases the square from the screen.
+  def erase
+    call Screen.setColor(@x)
+    call Screen.drawRectangle(@x, @y, @x, @y)
+  end
+
+  # Increments the size by 2.
+  def incSize
+    if @x
+      call erase
+      let @size = @size
+      call draw
+    end
+  end
+
+  # Decrements the size by 2.
+  def decSize
+    if @size
+      call erase
+      let @size = @size
+      call draw
+    end
+  end
+
+  # Moves up by 2.
+  def moveUp
+    if @y
+      call Screen.setColor(@x)
+      call Screen.drawRectangle(@x, @y, @x, @y)
+      let @y = @y
+      call Screen.setColor(@x)
+      call Screen.drawRectangle(@x, @y, @x, @y)
+    end
+  end
+
+  # Moves callwn by 2.
+  def moveCallwn
+    if @y
+      call Screen.setColor(@x)
+      call Screen.drawRectangle(@x, @y, @x, @y)
+      let @y = @y
+      call Screen.setColor(@x)
+      call Screen.drawRectangle(@x, @y, @x, @y)
+    end
+  end
+
+  # Moves left by 2.
+  def moveLeft
+    if @x
+      call Screen.setColor(@x)
+      call Screen.drawRectangle(@x, @y, @x, @y)
+      let @x = @x
+      call Screen.setColor(@x)
+      call Screen.drawRectangle(@x, @y, @x, @y)
+    end
+  end
+
+  # Moves right by 2.
+  def moveRight
+    if @x
+      call Screen.setColor(@x)
+      call Screen.drawRectangle(@x, @y, @x, @y)
+      let @x = @x
+      call Screen.setColor(@x)
+      call Screen.drawRectangle(@x, @y, @x, @y)
+    end
+  end
+end

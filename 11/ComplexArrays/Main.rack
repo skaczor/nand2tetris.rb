@@ -1,0 +1,60 @@
+##
+# Performs several complex Array tests.
+# For each test, the required result is printed along with the
+# actual result. In each test, the two results should be equal.
+###
+class Main
+  def self.main
+        let a = Array.new(10)
+        let b = Array.new(5)
+        let c = Array.new(1)
+
+        let a[3] = 2
+        let a[4] = 8
+        let a[5] = 4
+        let b[a[3]] = a[3] + 3  # b[2] = 5
+        let a[b[a[3]]] = a[a[5]] * b[((7 - a[3]) - Main.double(2)) + 1]  # a[5] = 8 * 5 = 40
+        let c[0] = nil
+        let c = c[0]
+
+        call Output.printString("Test 1 - Required result: 5, Actual result: ")
+        call Output.printInt(b[2])
+        call Output.println()
+        call Output.printString("Test 2 - Required result: 40, Actual result: ")
+        call Output.printInt(a[5])
+        call Output.println()
+        call Output.printString("Test 3 - Required result: 0, Actual result: ")
+        call Output.printInt(c)
+        call Output.println()
+
+        let c = nil
+
+        if c = nil
+            call Main.fill(a, 10)
+            let c = a[3]
+            let c[1] = 33
+            let c = a[7]
+            let c[1] = 77
+            let b = a[3]
+            let b[1] = b[1] + c[1]  # b[1] = 33 + 77 = 110
+        end
+
+        call Output.printString("Test 4 - Required result: 77, Actual result: ")
+        call Output.printInt(c[1])
+        call Output.println()
+        call Output.printString("Test 5 - Required result: 110, Actual result: ")
+        call Output.printInt(b[1])
+        call Output.println()
+    end
+
+    def self.double(a)
+        return a * 2
+    end
+
+    def self.fill(a, size)
+        while size > 0
+            let size = size - 1
+            let a[size] = Array.new(3)
+        end
+    end
+end

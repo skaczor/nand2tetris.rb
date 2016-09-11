@@ -1,0 +1,34 @@
+# Test program for the OS Memory class.
+class Main
+  # Performs several memory manipulations.
+  def self.main
+    let a = Memory.alloc(14333)
+    call Memory.deAlloc(a)
+
+    call Memory.poke(8000, 333)       # RAM[8000] = 333
+    let temp = Memory.peek(8000)
+    call Memory.poke(8001, temp + 1)  # RAM[8001] = 334
+
+    let a = Array.new(3)              # uses Memory.alloc
+    let a[2] = 222
+    call Memory.poke(8002, a[2])      # RAM[8002] = 222
+
+    let b = Array.new(3)
+    let b[1] = a[2] - 100
+    call Memory.poke(8003, b[1])      # RAM[8003] = 122
+
+    let c = Array.new(500)
+    let c[499] = a[2] - b[1]
+    call Memory.poke(8004, c[499])    # RAM[8004] = 100
+
+    call Array.dispose(a)             # uses Memory.deAlloc
+    call Array.dispose(b)
+
+    let b = Array.new(3)
+    let b[0] = c[499] - 90
+    call Memory.poke(8005, b[0])      # RAM[8005] = 10
+
+    call Array.dispose(c)
+    call Array.dispose(b)
+  end
+end

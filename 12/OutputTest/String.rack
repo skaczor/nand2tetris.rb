@@ -1,0 +1,60 @@
+# This file is part of www.nand2tetris.org
+# and the book "The Elements of Computing Systems"
+# by Nisan and Schocken, MIT Press.
+# File name: projects/12/String.jack
+
+#
+# Represents a String object. Implements the String type.
+#
+class String
+  # De-allocates the string and frees its space.
+  def dispose
+  end
+
+  # Returns the current length of this String.
+  def length
+  end
+
+  # Returns the character at location j.
+  def charAt(j)
+  end
+
+  # Sets the j'th character of this string to be c.
+  def setCharAt(j, c)
+  end
+
+  # Appends the character c to the end of this String.
+  # Returns this string as the return value.
+  def appendChar(c)
+  end
+
+  # Erases the last character from this String.
+  def eraseLastChar
+  end
+
+  # Returns the integer value of this String until the first non
+  # numeric character.
+  def intValue
+  end
+
+  # Sets this String to hold a representation of the given number.
+  def setInt(number)
+  end
+
+  # Internal method to set String to positive int.
+  def intToString(number)
+  end
+
+
+  # Returns the new line character.
+  def self.newLine
+  end
+
+  # Returns the backspace character.
+  def self.backSpace
+  end
+
+  # Returns the double quote (") character.
+  def self.doubleQuote
+  end
+end

@@ -1,0 +1,72 @@
+# Test program for the OS String class.
+class Main
+    # Performs several string manipulations and prints their results.
+    def self.main
+        let s = String.new(0) # A zero-capacity string should be supported
+        call s.dispose
+
+        let s = String.new(6) # capacity 6, make sure length 5 will be printed
+        let s = s.appendChar(97)
+        let s = s.appendChar(98)
+        let s = s.appendChar(99)
+        let s = s.appendChar(100)
+        let s = s.appendChar(101)
+        call Output.printString("new,appendChar: ")
+        call Output.printString(s)                # new, appendChar: abcde
+        call Output.println
+
+        let i = String.new(6)
+        call i.setInt(12345)
+        call Output.printString("setInt: ")
+        call Output.printString(i)                # setInt: 12345
+        call Output.println
+
+        call i.setInt(-32767)
+        call Output.printString("setInt: ")
+        call Output.printString(i)                # setInt: -32767
+        call Output.println
+
+        call Output.printString("length: ")
+        call Output.printInt(s.length)          # length: 5
+        call Output.println
+
+        call Output.printString("charAt[2]: ")
+        call Output.printInt(s.charAt(2))         # charAt[2]: 99
+        call Output.println
+
+        call s.setCharAt(2, 45)
+        call Output.printString("setCharAt(2,'-'): ")
+        call Output.printString(s)                # setCharAt(2,'-'): ab-de
+        call Output.println
+
+        call s.eraseLastChar
+        call Output.printString("eraseLastChar: ")
+        call Output.printString(s)                # eraseLastChar: ab-d
+        call Output.println
+
+        let s = "456"
+        call Output.printString("intValue: ")
+        call Output.printInt(s.intValue)        # intValue: 456
+        call Output.println
+
+        let s = "-32123"
+        call Output.printString("intValue: ")
+        call Output.printInt(s.intValue)        # intValue: -32123
+        call Output.println
+
+        call Output.printString("backSpace: ")
+        call Output.printInt(String.backSpace)  # backSpace: 129
+        call Output.println
+
+        call Output.printString("doubleQuote: ")
+        call Output.printInt(String.doubleQuote)# doubleQuote: 34
+        call Output.println
+
+        call Output.printString("newLine: ")
+        call Output.printInt(String.newLine)    # newLine: 128
+        call Output.println
+
+        call i.dispose
+        call s.dispose
+    end
+end

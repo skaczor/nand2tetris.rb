@@ -1,0 +1,20 @@
+#
+# A library of basic system services.
+#
+class Sys
+  # Performs all the initializations required by the OS.
+  def self.init
+  end
+
+  # Halts execution.
+  def self.halt
+  end
+
+  # Waits approximately duration milliseconds and then returns.
+  def self.wait(duration)
+  end
+
+  # Prints the given error code in the form "ERR<errorCode>", and halts.
+  def self.error(errorCode)
+  end
+end
